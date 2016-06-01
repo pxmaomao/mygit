@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../../../Css/Child/BaseChild_Child.css" rel="stylesheet" />
+
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+
+
+
+
+  
+        .container{
+            width:950px;
+            margin:0 auto;
+        }
+            .container .item {
+                float: left;
+                width: 290px;
+                box-sizing: border-box;
+                height: 400px;
+                box-shadow: 0 0 5px black;
+                border-radius: 10px;
+                overflow: hidden;
+                text-align: center;
+            }
+
+                .container .item:not(:first-child) {
+                    margin-left: 10px;
+                }
+
+        .item ul {
+            list-style: none;
+            width: 100%;
+            margin: 0 auto;
+            transition: all 0.5s ease-in-out;
+            transform: translateY(0px);
+        }
+
+            .item ul li {
+                height: 40px;
+                line-height: 40px;
+                border-bottom: 1px dashed gray;
+                box-sizing: border-box;
+            }
+
+                .item ul li:hover {
+                    background-color: lightblue;
+                    cursor: pointer;
+                }
+
+                .item ul li.active {
+                    background-color: #FE8309;
+                }
+
+        .clearfix {
+            clear: both;
+            height: 0;
+            zoom: 1;
+            overflow: hidden;
+        }
+
+        #result {
+            padding-top: 100px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <header class="header"></header>
+    <div class="top_nav"></div>
+    <div class="wrap">
+        <div class="title">多联选择框-城市-demo</div>
+
+        <div class="container">
+            <div id="slt_a" class="item">
+            </div>
+            <div id="slt_b" class="item">
+            </div>
+            <div id="slt_c" class="item">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div id="result"></div>
+
+    </div>
+    <footer class="footer"></footer>
+</body>
+</html>
+<script src="../../../Jscript/jquery-1.11.1.min.js"></script>
+<script src="../../../Jscript/Base_Child.js"></script>
+<script src="../../../Jscript/BaseArea.js"></script>
+<script type="text/javascript">
+
+
+    $(".item").bind("mousewheel DOMMouseScroll", function (e) {
+        e = e || event;
+        var s = e.originalEvent.wheelDelta;
+        var y = $(this).find("ul").css("transform").toString().split(",")[5].replace(")", "") * 1;
+        var x = 0;
+        var height = $(this).find("ul").height() * 1 - $(this).height();
+        if (s > 0) {
+            if (y + 120 > 0) {
+                y = 0;
+            }
+            else {
+                y += 120;
+            }
+        }
+        else {
+            if (y - 120 <= -height) {
+                y = -height;
+            }
+            else {
+                y -= 120;
+            }
+        }
+        $(this).find("ul").css({ transform: "translateY(" + y + "px)" })
+    });
+
+
+
+</script>

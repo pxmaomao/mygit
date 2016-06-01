@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../../../Css/Child/BaseChild_Child.css" rel="stylesheet" />
+    <style type="text/css">
+        * {
+            padding: 0px;
+            margin: 0px;
+            font-family: STheiti, Verdana, 微软雅黑, 宋体, Geneva, sans-serif;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        #tab_container {
+        }
+
+            #tab_container table {
+                border-collapse: collapse;
+            }
+
+                #tab_container table tr th, #tab_container table tr td {
+                    border: 1px solid black;
+                    padding: 6px 10px;
+                    text-align: center;
+                }
+
+                #tab_container table tr th {
+                    cursor: pointer;
+                }
+    </style>
+</head>
+<body>
+    <header class="header"></header>
+    <div class="top_nav"></div>
+    <div class="wrap">
+        <div class="title">翻页-demo</div>
+        <div class="container">
+            <div id="tab_container">
+
+            </div>
+            <div>
+                <select id="PageSize">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option selected="selected">5</option>
+                    <option>10</option>
+                </select><button id="btn_before"><</button><button id="btn_next">></button><input id="PageIndex" type="text" value="1" />共<span id="PageCount"></span>页
+            </div>
+        </div>
+    </div>
+    <footer class="footer"></footer>
+   
+
+</body>
+</html>
+
+
+<script src="../../../Jscript/jquery-1.11.1.min.js"></script>
+<script src="../../../Jscript/Base_Child.js"></script>
+
+<script type="text/javascript">
+
+    $("#PageSize").bind("change",function () {
+        var pagesize = $("#PageSize").val();
+        option.pagesize = pagesize * 1;
+        option.pageindex = 1;
+        InitTable(option);
+    })
+
+    $("#btn_before").bind("click", function () {
+        var pagesize = $("#PageSize").val();
+        var pageindex = $("#PageIndex").val();
+        if (option.pageindex != 1) {
+            option.pageindex = pageindex * 1 - 1;
+            option.pagesize = pagesize * 1;
+            InitTable(option);
+        }
+    })
+    $("#btn_next").bind("click", function () {
+        var pagesize = $("#PageSize").val();
+        var pageindex = $("#PageIndex").val();
+        if (option.pageindex < $("#PageCount").html() * 1) {
+            option.pageindex = pageindex * 1 + 1;
+            option.pagesize = pagesize * 1;
+            InitTable(option);
+        }
+    })
+    var data = [
+        { Id: 1, name: "a", age: 18, hobby: "cgame", type: 10, time: "2016/01/01 00:00:00" },
+        { Id: 2, name: "b", age: 17, hobby: "basketball", type: 9, time: "2016/01/02 00:00:00" },
+        { Id: 3, name: "s", age: 20, hobby: "cook", type: 8, time: "2016/01/03 00:00:00" },
+        { Id: 4, name: "d", age: 23, hobby: "dota", type: 7, time: "2016/01/04 00:00:00" },
+        { Id: 5, name: "h", age: 16, hobby: "relax", type: 6, time: "2016/01/05 00:00:00" },
+        { Id: 6, name: "f", age: 15, hobby: "football", type: 5, time: "2016/01/06 00:00:00" },
+        { Id: 7, name: "a", age: 18, hobby: "game", type: 4, time: "2016/01/07 00:00:00" },
+        { Id: 8, name: "h", age: 25, hobby: "hunt", type: 3, time: "2016/01/08 00:00:00" },
+        { Id: 9, name: "q", age: 24, hobby: "vollball", type: 2, time: "2016/01/09 00:00:00" },
+        { Id: 10, name: "j", age: 19, hobby: "vr", type: 1, time: "2016/01/10 00:00:00" },
+
+    ]
+    var dataFields = [
+        { thName: "编号", value: "Id", width: 150, order: "u" },
+        { thName: "名称", value: "name", width: 150, order: "u" },
+        { thName: "年龄", value: "age", width: 150, order: "u" },
+        { thName: "爱好", value: "hobby", width: 150, order: "u" },
+        { thName: "类型", value: "type", width: 150, order: "u" },
+        {
+            thName: "时间", value: "time", width: 150, order: "u", format: function (i) {
+                var date = new Date(i)
+                var y = date.getFullYear();
+                var m = date.getMonth()+1;
+                var d = date.getDate();
+                m = m < 10 ? "0" + m : m;
+                d = d < 10 ? "0" + d : d;
+                return y + "-" + m + "-" + d;
+            }
+        },
+    ]
+    var option = {
+        id: "tab_container",
+        pageindex: 1,
+        pagesize: 5,
+        dataFields: dataFields,
+        data: data,
+    }
+
+    function getdata(a) {
+        var s = [];
+        for (var i = 0; i < a; i++) {
+            var ss = [];
+            for (var j = 0; j < 5; j++) {
+                ss.push(i)
+            }
+            s.push(ss);
+        }
+        return s;
+    }
+    InitTable(option)
+    function InitTable(opiton) {
+        var pagesize = option.pagesize;
+        var pageindex = option.pageindex;
+        var data = option.data;
+
+        var pagecount = Math.ceil(data.length / pagesize);
+        var tab = $("#" + opiton.id);
+        var s = "<table>";
+
+        s += "<tr>";
+        for (var i = 0; i < option.dataFields.length; i++) {
+            var style = "width:" + option.dataFields[i]["width"] + "px;"
+            s += "<th style='" + style + "' name='" + option.dataFields[i]["value"] + "' order='" + option.dataFields[i]["order"] + "'>";
+            s += option.dataFields[i]["thName"];
+            s += "</th>";
+        }
+        s += "</tr>";
+
+        var icount = pagesize * pageindex > data.length ? data.length : pagesize * pageindex;
+        for (var i = pagesize * (pageindex - 1) ; i < icount ; i++) {
+            s += "<tr>";
+            for (var j = 0; j < option.dataFields.length; j++) {
+                s += "<td>";
+                if (typeof option.dataFields[j]["format"] == "function") {
+                    s += option.dataFields[j]["format"](data[i][option.dataFields[j]["value"]]);
+                }
+                else {
+                    s += data[i][option.dataFields[j]["value"]];
+                }
+
+
+                s += "</td>";
+            }
+            s += "</tr>";
+        }
+
+        s += "</table>";
+        $("#" + option.id).html(s);
+        $("#PageCount").html(pagecount)
+        $("#PageIndex").val(option.pageindex);
+        var tab = $("#" + opiton.id).find("table").find("tr").find("th").each(function () {
+            $(this).bind("click", function () {
+                var index = $(this).attr("name");
+
+                var order = $(this).attr("order");
+                for (var i = 0; i < dataFields.length; i++) {
+                    if (dataFields[i].value == index) {
+                        if (order == "u") {
+                            dataFields[i].order = "d";
+                        }
+                        else {
+                            dataFields[i].order = "u";
+                        }
+                    }
+                }
+
+                var newdata = data.sort(function (a, b) {
+                    if (typeof a[index] == "number") {
+                        var rtn = order == "u" ? a[index] - b[index] : b[index] - a[index];
+                        return rtn;
+                    }
+                    else if (index.indexOf("time") > -1) {
+                        var rtn = order == "u" ? a[index].replace(/[^0-9]+/g, '') - b[index].replace(/[^0-9]+/g, '') : b[index].replace(/[^0-9]+/g, '') - a[index].replace(/[^0-9]+/g, '');
+                        return rtn;
+
+                    }
+                    else {
+                        var rtn = order == "u" ? new String(a[index]).charCodeAt() - String(b[index]).charCodeAt() : new String(b[index]).charCodeAt() - String(a[index]).charCodeAt();
+                        return rtn;
+                    }
+                });
+                data = newdata;
+                InitTable(option)
+            })
+        })
+    }
+
+
+</script>

@@ -1,0 +1,89 @@
+﻿* {
+            padding: 0px;
+            margin: 0px;
+            font: 14px/1.5 Arial, "Microsoft Yahei", sans-serif;
+            box-sizing: border-box;
+        }
+body{
+     background: url('../../Images/bg.gif') top center repeat #000;
+}  
+ .header {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            background-color:black;
+        }
+
+            .header .span_title {
+                position: absolute;
+                left: 100px;
+                top: 10px;
+                font-size: 48px;
+                font-weight: bolder;
+                color: white;
+            }
+
+
+        .top_nav {
+            width: 1000px;
+            margin: 0 auto;
+            padding-top: 15px;
+            height: 40px;
+            padding-bottom: 15px;
+        }
+
+            .top_nav a {
+                display: inline-block;
+                float: left;
+                margin-left: 15px;
+                text-decoration: none;
+                color: black;
+            }
+
+                .top_nav a:hover {
+                    color: #50A9E9;
+                }
+
+
+        .wrap {
+            width: 1000px;
+            min-height: 700px;
+            margin: 0 auto;
+            margin-top: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px black;
+            background-color: #FFFFFF;
+        }
+
+            .wrap .title {
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                padding-left: 50px;
+                font-weight: bolder;
+                font-size: 24px;
+                transition: all 1s;
+            }
+
+                .wrap .title:hover {
+                    transform: translateX(100px);
+                    cursor: pointer;
+                    color: #50A9E9;
+                }
+
+            .wrap .container {
+                padding: 10px 20px;
+                overflow: hidden;
+            }
+
+        .footer {
+            position: absolute;
+            left: 0px;
+            height: 60px;
+            width: 100%;
+            margin-top: 60px;
+            text-align: center;
+            line-height: 60px;
+            color: white;
+            background-color:black;
+        }

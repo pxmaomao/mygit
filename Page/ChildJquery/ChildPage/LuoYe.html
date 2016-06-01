@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../../../Css/Child/BaseChild_Child.css" rel="stylesheet" />
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+       
+        .divs {
+            position: absolute;
+            top: -50px;
+            transform: rotateZ(0deg);
+            height: 40px;
+            width: 40px;
+        }
+
+      
+
+        .img-container {
+            transform-style: preserve-3d;
+            width: 150px;
+            height: 200px;
+            transition:all 2s;
+        }
+
+            .img-container img {
+                width: 150px;
+                height: 200px;
+                position: absolute;
+                pointer-events: none;
+            }
+    </style>
+</head>
+<body>
+    <header class="header"></header>
+    <div class="top_nav"></div>
+    <div class="wrap">
+        <div class="title">落叶-demo</div>
+        <div class="container">
+         
+           
+ 
+        </div>
+    </div>
+    <footer class="footer"></footer>
+</body>
+</html>
+<script src="../../../Jscript/jquery-1.11.1.min.js"></script>
+<script src="../../../Jscript/Base_Child.js"></script>
+<script type="text/javascript">
+    var snow = ["../../../Images/luoye/o_1.png", "../../../Images/luoye/o_2.png", "../../../Images/luoye/o_3.png", "../../../Images/luoye/o_4.png", "../../../Images/luoye/o_5.png", "../../../Images/luoye/o_6.png"]
+    var ss = [-100, 0, 0, 50, 100, 150, 200, 250, 300];
+    function abc() {
+        var left = Math.floor(Math.random() * 1440);
+        var deg = Math.floor(Math.random() * 1440);
+        var second = Math.random() * 3 + 7;
+        var background = snow[Math.floor(Math.random() * 6)];
+        var tleft = left * 1 + ss[Math.floor(Math.random() * 9)] * 1;
+        var a = $("<div class='divs' style='left:" + left + "px;transition:all " + second + "s ease-out;background-image:url(\"" + background + "\");'></div>");
+        $("body").append(a);
+        setTimeout(function () { a.css({ left: tleft + "px", top: "300px", transform: "rotateZ(" + deg + "deg)" }) }, 20)
+        setTimeout(function () { a.remove() }, second * 1000);
+    }
+    var t = setInterval(abc, 200);
+    var deg = 60;
+    $(document).click(function () {
+        $(".img-container").css("transform", "rotateY(" + deg + "deg)");
+        deg += 60;
+    })
+
+</script>

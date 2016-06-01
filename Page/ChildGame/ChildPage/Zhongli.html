@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../../../Css/Child/BaseChild_Child.css" rel="stylesheet" />
+
+    <style type="text/css">
+        * {
+            padding: 0px;
+            margin: 0px;
+            font-family: STheiti, Verdana, 微软雅黑, 宋体, Geneva, sans-serif;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mycontainer {
+            position: relative;
+            height: 400px;
+            width: 410px;
+            border: 1px solid black;
+            margin: 0 auto;
+  
+        }
+
+        .ball {
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            top: 0px;
+            left: 0px;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <header class="header"></header>
+    <div class="top_nav"></div>
+    <div class="wrap">
+        <div class="title">模仿重力-demo</div>
+        <div class="container">
+            <div class="mycontainer">
+
+            </div>
+        </div>
+    </div>
+    <footer class="footer"></footer>
+</body>
+</html>
+
+<script src="../../../Jscript/jquery-1.11.1.min.js"></script>
+<script src="../../../Jscript/Base_Child.js"></script>
+<script type="text/javascript">
+
+    $(".mycontainer").click(function () {
+        var that = $("<div class='ball'></div>");
+        $(this).append(that);
+        
+        abc(that)
+    })
+    function abc(obj) {
+
+        var i = 0;
+        var ml = Math.floor(Math.random() * 5) + 1;
+        var f = 0;
+        var g = 10;
+        setInterval(move, 1000 / 60)
+
+        function move() {
+            ++i;
+            var ttt = 125;
+         
+            var left = parseFloat($(obj).css("left"));
+            var top = parseFloat($(obj).css("top"));
+            if ((i / ttt) % 2 == 1) {
+                g = g - 1;
+            };
+            if (Math.floor(i / ttt) % 2 == 1) {
+                g = g <= 0 ? 0 : g;
+                var v = (i - Math.floor(i / ttt) * ttt) * g * 0.1 - g * 0.1 * ttt;
+                v = v == 0 ? 0 : v + 0.4;
+            }
+            else {
+                var v = (g * 0.1 * (i - Math.floor(i / ttt) * ttt));
+            }
+            var ntop = top + 0.5 * v * (0.1);
+            if (Math.floor(i / (400 / ml)) % 2 == 1) {
+                var nleft = left - ml;
+            }
+            else {
+                var nleft = left + ml;
+            }
+            if (g == 0) {
+                var nleft = left;
+            }
+            $(obj).css({ left: nleft + "px", top: ntop + "px" });
+        }
+    }
+</script>

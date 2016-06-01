@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../../../Css/Child/BaseChild_Child.css" rel="stylesheet" />
+
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+                -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .nav_left_container {
+            position: relative;
+            width: 200px;
+            border: 1px solid #F1F1F1;
+            overflow: hidden;
+        }
+
+        .nav_left {
+            width: 100%;
+            position: absolute;
+        }
+
+        .nav_left_ul {
+            width: 100%;
+            list-style: none;
+        }
+
+            .nav_left_ul .item {
+                width: 100%;
+                height: 35px;
+                cursor: pointer;
+                line-height: 35px;
+                text-align: center;
+            }
+
+                .nav_left_ul .item:hover {
+                    background-color: #DADADA;
+                
+                }
+
+        .scroll_bar {
+            position: absolute;
+            z-index: 9999;
+            top: 0px;
+            right: 0px;
+            width: 5px;
+            height: 50%;
+            background-color: rgba(55,148,227,.2);
+            cursor: pointer;
+        }
+
+            .scroll_bar:hover {
+                background-color: rgba(55,148,227,.5);
+            }
+
+            .scroll_bar:active {
+                background-color: rgba(55,148,227,.5);
+            }
+    </style>
+
+</head>
+<body>
+    <header class="header"></header>
+    <div class="top_nav"></div>
+    <div class="wrap">
+        <div class="title">自制滚动条-demo</div>
+
+        <div class="container">
+            <div class="nav_left_container">
+                <div class="nav_left">
+                    <ul class="nav_left_ul">
+                        <li class="item">1</li>
+                        <li class="item">2</li>
+                        <li class="item">3</li>
+                        <li class="item">4</li>
+                        <li class="item">5</li>
+                        <li class="item">1</li>
+                        <li class="item">2</li>
+                        <li class="item">3</li>
+                        <li class="item">4</li>
+                        <li class="item">5</li>
+                        <li class="item">1</li>
+                        <li class="item">2</li>
+                        <li class="item">3</li>
+                        <li class="item">4</li>
+                        <li class="item">5</li>
+                        <li class="item">1</li>
+                        <li class="item">2</li>
+                        <li class="item">3</li>
+                        <li class="item">4</li>
+                        <li class="item">5</li>
+                        <li class="item">1</li>
+                        <li class="item">2</li>
+                        <li class="item">3</li>
+                        <li class="item">4</li>
+                        <li class="item">5</li>
+                        <li class="item">1</li>
+                        <li class="item">2</li>
+                        <li class="item">3</li>
+                        <li class="item">4</li>
+                        <li class="item">end</li>
+                    </ul>
+                </div>
+                <div class="scroll_bar"></div>
+            </div>
+        </div>
+
+
+    </div>
+    <footer class="footer"></footer>
+</body>
+</html>
+<script src="../../../Jscript/jquery-1.11.1.min.js"></script>
+<script src="../../../Jscript/Base_Child.js"></script>
+<script type="text/javascript">
+
+    $(window).resize(function () { setnavHeight() })
+    setnavHeight()
+    function setnavHeight() {
+        var height = document.body.clientHeight * 1 - 100;
+        $(".nav_left_container").css({ height: height })
+    }
+    $(".nav_left_container").on("mousewheel DOMMouseScroll", function (e) {
+        var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||  // chrome & ie
+                    (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));              // firefox
+        var top = parseInt($(this).find(".scroll_bar").css("top"));
+        var height = parseInt($(this).css("height"));
+        var navheight = parseInt($(this).find(".nav_left").css("height"))
+        var navtop = 0;
+        var ntop = 0;
+        var ju = 10;
+        if (delta > 0) {
+            // 向上滚
+            if (top > 0) {
+                ntop = (top - ju) <= 0 ? 0 : (top - ju);
+                $(this).find(".scroll_bar").css({ top: ntop });
+            }
+        } else if (delta < 0) {
+            // 向下滚
+            if (top <= height / 2) {
+                ntop = (top + ju) >= height / 2 ? height / 2 : (top + ju);
+                $(this).find(".scroll_bar").css({ top: ntop })
+            }
+        }
+
+        navtop = (height - navheight) * ntop * 2 / height
+        $(this).find(".nav_left").css({ top: navtop })
+    });
+    
+    $(".nav_left_container").find(".scroll_bar").bind("mousedown DOMMousedown", function (e) {
+        var that = this;
+        e = e || event || e.originalEvent;
+        var sy = e.clientY;
+        var top = parseInt($(this).css("top"));
+
+        var height = parseInt($(".nav_left_container").css("height"));
+        var navheight = parseInt($(this).parent().find(".nav_left").css("height"))
+        var navtop = 0;
+        $(document).bind("mousemove DOMMousemove", function (e) {
+            e = e || event || e.originalEvent;
+            var ey = e.clientY;
+            var ntop = top * 1 + ey * 1 - sy * 1;
+            ntop = ntop <= 0 ? 0 : ntop >= height / 2 ? height / 2 : ntop;
+            $(that).css({ top: ntop })
+            navtop = (height - navheight) * ntop * 2 / height
+            $(this).find(".nav_left").css({ top: navtop })
+        })
+    })
+    $(document).bind("mouseup", function () {
+        $(document).unbind("mousemove");
+    })
+
+
+</script>

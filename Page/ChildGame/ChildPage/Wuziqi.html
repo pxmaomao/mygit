@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../../../Css/Child/BaseChild_Child.css" rel="stylesheet" />
+    <style type="text/css">
+        * {
+            padding: 0px;
+            margin: 0px;
+            font-family: STheiti, Verdana, 微软雅黑, 宋体, Geneva, sans-serif;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            
+        }
+
+        #tab_container {
+            position: relative;
+            width: 550px;
+            height:550px;
+            margin: 0 auto;
+           
+        }
+
+        .tab {
+            border-collapse: collapse;
+        }
+
+            .tab tr td {
+                height: 50px;
+                width: 50px;
+            }
+
+        #tab_user {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+
+            #tab_user tr td {
+                text-align: center;
+            }
+
+                #tab_user tr td .span_a {
+                    display: inline-block;
+                    height: 75%;
+                    width: 75%;
+                    border-radius: 50%;
+                    background-color: black;
+                }
+
+                #tab_user tr td .span_b {
+                    display: inline-block;
+                    height: 75%;
+                    width: 75%;
+                    border-radius: 50%;
+                    background-color: orange;
+                }
+
+        #tab_back {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+        }
+
+            #tab_back tr td {
+                border: 1px solid gray;
+            }
+    </style>
+</head>
+<body>
+    <header class="header"></header>
+    <div class="top_nav"></div>
+    <div class="wrap">
+        <div class="title">五子棋-demo</div>
+        <div class="container">
+
+
+            <div id="tab_container">
+
+                <table id="tab_back" class="tab">
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                </table>
+                <table id="tab_user" class="tab">
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <footer class="footer"></footer>
+</body>
+</html>
+<script src="../../../Jscript/jquery-1.11.1.min.js"></script>
+<script src="../../../Jscript/Base_Child.js"></script>
+<script type="text/javascript">
+    var wuzi = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ];
+    var whoi = 0;
+    //落子
+    $("#tab_user").find("tr").find("td").each(function () {
+        $(this).click(function () {
+            var flag = $(this).find("span").length;
+            var trindex = $(this).parent().index();
+            var tdindex = $(this).index();
+            if (flag == 0) {
+                if (whoi % 2 == 0) {
+                    wuzi[trindex][tdindex] = 1;
+                    $(this).append("<span class='span_b item'></span>")
+                }
+                else {
+                    wuzi[trindex][tdindex] = 2;
+                    $(this).append("<span class='span_a item'></span>")
+                }
+                whoi++;
+                panh()
+            }
+        })
+    })
+    //判断横排
+    function panh() {
+        var arr = wuzi;
+        for (var i = 0, len = arr.length; i < len; i++) {
+            var s = [];
+            for (var n = 0; n < arr[0].length; n++) {
+                s.push(arr[i][n])
+            }
+            if (ss(s)) {
+                return false;
+            }
+        }
+        pans();
+
+    }
+    //判断竖排
+    function pans() {
+        var arr = wuzi;
+        for (var i = 0, len = arr[0].length; i < len; i++) {
+            var s = [];
+            for (var n = 0; n < arr.length; n++) {
+                s.push(arr[n][i])
+            }
+            if (ss(s)) {
+                return false;
+            }
+        }
+        panx()
+    }
+    //判断斜排
+    function panx() {
+        var arr = wuzi;
+        var len = arr.length;
+        for (var i = 4 ; i < len; i++) {
+            var s = [];
+            for (var n = 0; n <= i; n++) {
+                s.push(arr[n][i - n]);
+            }
+            if (ss(s)) {
+                return false;
+            }
+
+        }
+        for (var i = 1; i < len - 4; i++) {
+            var s = [];
+            for (var n = 1; n <= len - i; n++) {
+                s.push(arr[n + i - 1][len - n])
+            }
+            if (ss(s)) {
+                return false;
+            }
+        }
+        for (var i = 0; i < len - 4; i++) {
+            var s = [];
+            for (var n = 0; n < len - i; n++) {
+                s.push(arr[n][n + i])
+            }
+            if (ss(s)) {
+                return false;
+            }
+        }
+        for (var i = 1; i < len - 4; i++) {
+            var s = [];
+            for (var n = 0; n < len - i; n++) {
+                s.push(arr[i + n][n])
+            }
+            if (ss(s)) {
+                return false;
+            }
+        }
+
+    }
+    //判断是否五连
+    function ss(arr) {
+
+        var flag = false;
+        for (var i = 0; i + 4 < arr.length; i++) {
+            var s = [];
+            for (var n = i; n < i + 5; n++) {
+                s.push(arr[n]);
+            }
+            flag = s.every(function (item, index, array) { return item == arr[i] })
+            var ff = s.some(function (item, index, array) { return item != 0 })
+            if (flag && ff) {
+             
+                var winner = s[0] == 1 ? "orange" : "black";
+                alert(winner + " win !");
+                Init()
+                return flag;
+
+            }
+        }
+    }
+    //重新开始
+    function Init() {
+        $(".item").remove();
+        wuzi = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        ];
+        whoi = 0;
+    }
+
+</script>

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../../../Css/Child/BaseChild_Child.css" rel="stylesheet" />
+
+    <style type="text/css">
+        * {
+            padding: 0px;
+            margin: 0px;
+            font: 14px/1.5 Arial, "Microsoft Yahei", sans-serif;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background: url('../../../Images/bg.gif') top center repeat #000;
+        }
+
+        #sss {
+            padding: 10px;
+        }
+
+        .img_container {
+            position: relative;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+
+        .item {
+            position: absolute;
+            transition: all 5s;
+        }
+
+
+     
+    </style>
+</head>
+<body>
+
+    <header class="header"></header>
+    <div class="top_nav"></div>
+    <div class="wrap">
+        <div class="title">表格拼成图片-demo</div>
+        <div class="container">
+            <div id="sss"></div>
+        </div>
+    </div>
+    <footer class="footer"></footer>
+
+
+</body>
+</html>
+<script src="../../../Jscript/jquery-1.11.1.min.js"></script>
+<script src="../../../Jscript/Base_Child.js"></script>
+<script type="text/javascript">
+    Init("sss", "../../../Images/1.jpg", 10, 10);
+    var imgarr = ["../../../Images/1.jpg", "../../../Images/2.jpg", "../../../Images/3.jpg", "../../../Images/4.jpg", "../../../Images/5.jpg", "../../../Images/6.jpg", "../../../Images/7.jpg"]
+    function Init(id, imgsrc, nw, nh) {
+        var img = new Image();
+        img.src = imgsrc;
+        img.onload = function () {
+            var dom = document.getElementById(id);
+            var width = this.width;
+            var height = this.height;
+            var nwidth = width / nw;
+            var nheight = height / nh;
+            var len = nw * nh;
+            var s = "<div class='img_container' style='width:" + width + "px;height:" + height + "px'>";
+            for (var i = 0; i < len; i++) {
+                var x = (i % nw) * nwidth;
+                var y = Math.floor(i / nw) * nheight;
+                var style = "top:" + y + "px;left:" + x + "px;width:" + nwidth + "px;height:" + nheight + "px;background-position:" + (-x) + "px " + (-y) + "px; background-image:url(" + imgsrc + ")";
+                s += "<div class='item' style='" + style + "'></div>"
+            }
+            s += "</div>";
+            dom.innerHTML = s;
+            dom.onclick = function () {
+                
+                $(".item").each(function () {
+
+                    var top = parseInt($(this).css("top"))
+                    var left = parseInt($(this).css("left"))
+                    var jd = Math.atan(top / left);
+                    var slen = Math.sqrt((top - height / 2) * (top - height / 2) + (left - width / 2) * (left - width / 2));
+                    var x = (Math.random() - 0.5) > 0 ? Math.random() * 360 : -(Math.random() * 360);
+                    var y = (Math.random() - 0.5) > 0 ? Math.random() * 360 : -(Math.random() * 360);
+                    var rorate = Math.random() * 360;
+                    $(this).css({ "transform": "translate3d(" + x + "px," + y + "px,0) rotateZ(" + rorate + "deg)" })
+
+                })
+                setTimeout(function () {
+                    var index=Math.floor(Math.random()*10)
+                    var imag="../../../Images/"+index+".jpg"
+                    $(".item").css({ "transform": "translate3d(0,0,0)", "background-image": "url(" + imag + ")" })
+
+                }, 6000)
+            }
+
+        }
+    }
+
+
+
+</script>

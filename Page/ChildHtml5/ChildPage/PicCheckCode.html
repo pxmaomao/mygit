@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../../../Css/Child/BaseChild_Child.css" rel="stylesheet" />
+
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+        }
+
+     
+
+      
+
+        #check {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        #mycanvas {
+            position: absolute;
+            left: 70px;
+            top: 0px;
+        }
+
+        #movecanvas {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+
+        #btn_range {
+            position: absolute;
+            top: 210px;
+            width: 280px;
+            left: 35px;
+        }
+    </style>
+
+</head>
+<body>
+    <header class="header"></header>
+    <div class="top_nav"></div>
+    <div class="wrap">
+        <div class="title">canvas 图片滑块验证-demo</div>
+        <div id="check">
+            <canvas id="mycanvas" height="180" width="240"></canvas>
+            <canvas id="movecanvas" height="50" width="60"></canvas>
+            <input type="range" id="btn_range" max="280" value="0" />
+        </div>
+    </div>
+    <footer class="footer"></footer>
+
+</body>
+</html>
+<script src="../../../Jscript/jquery-1.11.1.min.js"></script>
+<script src="../../../Jscript/Base_Child.js"></script>
+<script type="text/javascript">
+
+    var bg_can = document.getElementById("mycanvas");
+    var bg_ctx = bg_can.getContext("2d");
+    var m_can = document.getElementById("movecanvas");
+    var m_ctx = m_can.getContext("2d");
+    var cutH = m_can.height;
+    var cutW = m_can.width;
+    var img = new Image();
+    img.src = "../../../Images/kb.jpg";
+    var move = "";
+    var y = 0;
+    var x = 0;
+    Init()
+    function Init() {
+         y = Math.random() * (bg_can.height - cutH);
+         x = Math.random() * (bg_can.width - cutW);
+         $(".myImg").css("background-position", "-" + x + "px -" + y + "px")
+    }
+    
+    
+    img.onload = function () {
+        bg_ctx.drawImage(img, 0, 0, bg_can.width, bg_can.height, 0, 0, bg_can.width, bg_can.height);
+    }
+  
+    $("#btn_range").bind("input propertychange", function () {
+        $(m_can).css("left", $(this).val() + "px")
+        console.log($(this).val())
+
+    })
+    $("#btn_range").mousedown(function () {
+        move = bg_ctx.clearRect(x, y, cutW, cutH);
+        m_ctx.drawImage(img, x, y, cutW, cutH, 0, 0, cutW, cutH);
+        $(m_can).css({ top: y + "px" })
+    })
+    $("#btn_range").mouseup(function () {
+        if ($(this).val() > x + 65 && $(this).val() < x + 75) {
+            alert("ok");
+            Init();
+        }
+        $(m_can).css("left", "0px");
+        bg_ctx.drawImage(img, 0, 0, bg_can.width, bg_can.height, 0, 0, bg_can.width, bg_can.height);
+        $(this).val(0);
+        m_ctx.clearRect(0, 0, cutW, cutH);
+    })
+</script>
